@@ -3,7 +3,7 @@ const ProductModel = require("../models/product.model");
 // get all product list
 exports.getProductList = (req, res) => {
   //console.log('here all products list');
-  ProductModel.getAllProducts((err, products) => {
+  ProductModel.getAllProducts(req, (err, products) => {
     console.log("We are here");
     if (err) res.send(err);
     console.log(req.query.price_from);

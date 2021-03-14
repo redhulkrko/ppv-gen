@@ -14,7 +14,7 @@ var Product = function (product) {
 };
 
 // get all products
-Product.getAllProducts = (result) => {
+Product.getAllProducts = (req, result) => {
   let myquery = "SELECT * FROM products WHERE 1 = 1";
 
   let params = {};
@@ -22,11 +22,11 @@ Product.getAllProducts = (result) => {
   console.log(result);
 
   if (req.query["price_from"]) {
-    myquery += "AND price >= :price_from";
+    myquery += " AND price >= :price_from";
     params.price_from = req.query["price_from"];
   }
   if (req.query["price_to"]) {
-    myquery += "AND price <= :price_to";
+    myquery += " AND price <= :price_to";
     params.price_to = req.query["price_to"];
   }
 
