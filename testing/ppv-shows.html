@@ -1,0 +1,2207 @@
+<html>
+  <body>
+    <p id="demo"></p>
+    <script>
+      const chosenShow = "Raw";
+      const shows = [
+        {
+          name: "Raw",
+          no_of_matches: 8,
+          active: true,
+          matches: [
+            {
+              type: "One on One",
+              active: true,
+              chance: 76,
+              maleChance: 80,
+              characterSlots: 2,
+            },
+            {
+              type: "Two on Two Tag Team",
+              active: true,
+              chance: 13,
+              maleChance: 80,
+              characterSlots: 4,
+              structure: [
+                {
+                  cast: "team",
+                  slots: [2],
+                  chance: 70,
+                },
+                {
+                  cast: "single",
+                  slots: [1, 1],
+                  chance: 30,
+                },
+              ],
+            },
+            {
+              type: "Triple Threat",
+              active: false,
+              chance: 5,
+              maleChance: 90,
+              characterSlots: 3,
+            },
+            {
+              type: "Fatal 4-Way",
+              active: true,
+              chance: 1,
+              maleChance: 90,
+              characterSlots: 4,
+            },
+          ],
+        },
+        {
+          name: "Smackdown",
+          no_of_matches: 5,
+          active: false,
+          matches: [
+            {
+              type: "One on One",
+              active: true,
+              chance: 76,
+              maleChance: 50,
+            },
+            {
+              type: "Two on Two Tag Team",
+              active: true,
+              chance: 18,
+              maleChance: 30,
+            },
+            {
+              type: "Triple Threat",
+              active: true,
+              chance: 5,
+              maleChance: 70,
+            },
+            {
+              type: "Fatal 4-Way",
+              active: false,
+              chance: 1,
+              maleChance: 50,
+            },
+          ],
+        },
+      ];
+
+      const roster = [
+        {
+          name: "Adam Cole",
+          active: true,
+          overall: 84,
+          character: "heel",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "AJ Styles",
+          active: true,
+          overall: 91,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Akam",
+          active: true,
+          overall: 76,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Akira Tozawa",
+          active: true,
+          overall: 77,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Aleister Black",
+          active: true,
+          overall: 84,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Alexa Bliss",
+          active: true,
+          overall: 83,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Alicia Fox",
+          active: true,
+          overall: 70,
+          character: "heel",
+          gender: "female",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Andrade",
+          active: true,
+          overall: 84,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "André The Giant",
+          active: true,
+          overall: 87,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Angelo Dawkins",
+          active: true,
+          overall: 79,
+          character: "face",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Apollo Crews",
+          active: true,
+          overall: 74,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Ariya Daivari",
+          active: true,
+          overall: 68,
+          character: "heel",
+          gender: "male",
+          brand: "205 Live",
+          type: "superstar",
+        },
+        {
+          name: "Asuka",
+          active: true,
+          overall: 84,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Batista",
+          active: true,
+          overall: 87,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Bayley",
+          active: true,
+          overall: 86,
+          character: "heel",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Becky Lynch",
+          active: true,
+          overall: 90,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Beth Phoenix",
+          active: true,
+          overall: 85,
+          character: "face",
+          gender: "female",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Bianca Belair",
+          active: true,
+          overall: 77,
+          character: "face",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Big Boss Man",
+          active: true,
+          overall: 81,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Big E",
+          active: true,
+          overall: 85,
+          character: "face",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Big Show",
+          active: true,
+          overall: 81,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Billie Kay",
+          active: true,
+          overall: 78,
+          character: "face",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Bo Dallas",
+          active: true,
+          overall: 71,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Bobby Fish",
+          active: true,
+          overall: 77,
+          character: "heel",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Bobby Heenan",
+          active: true,
+          overall: 80,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "manager",
+        },
+        {
+          name: "Bobby Lashley",
+          active: true,
+          overall: 86,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Booker T",
+          active: true,
+          overall: 86,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Braun Strowman",
+          active: true,
+          overall: 87,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Bray Wyatt",
+          active: true,
+          overall: 82,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Bret 'Hitman' Hart",
+          active: true,
+          overall: 91,
+          character: "face",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Brie Bella",
+          active: true,
+          overall: 76,
+          character: "face",
+          gender: "female",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Brock Lesnar",
+          active: true,
+          overall: 93,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Brutus Beefcake",
+          active: true,
+          overall: 82,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Murphy",
+          active: true,
+          overall: 78,
+          character: "face",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Candice LeRae",
+          active: true,
+          overall: 75,
+          character: "face",
+          gender: "female",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Carmella",
+          active: true,
+          overall: 75,
+          character: "heel",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Cedric Alexander",
+          active: true,
+          overall: 80,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Cesaro",
+          active: true,
+          overall: 83,
+          character: "face",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Chad Gable",
+          active: true,
+          overall: 75,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Charlotte Flair",
+          active: true,
+          overall: 87,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Christian",
+          active: true,
+          overall: 83,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Chyna",
+          active: true,
+          overall: 87,
+          character: "face",
+          gender: "female",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Curt Hawkins",
+          active: true,
+          overall: 75,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Curtis Axel",
+          active: true,
+          overall: 71,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Dakota Kai",
+          active: true,
+          overall: 73,
+          character: "heel",
+          gender: "female",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Dana Brooke",
+          active: true,
+          overall: 69,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Daniel Bryan",
+          active: true,
+          overall: 89,
+          character: "face",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Dash Wilder",
+          active: true,
+          overall: 83,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Diesel",
+          active: true,
+          overall: 87,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Dolph Ziggler",
+          active: true,
+          overall: 81,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Drake Maverick",
+          active: true,
+          overall: 68,
+          character: "face",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Drew Gulak",
+          active: true,
+          overall: 82,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Drew McIntyre",
+          active: true,
+          overall: 87,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Dusty Rhodes",
+          active: true,
+          overall: 85,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "EC3",
+          active: true,
+          overall: 76,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Eddie Guerrero",
+          active: true,
+          overall: 89,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Edge",
+          active: true,
+          overall: 89,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Elias",
+          active: true,
+          overall: 81,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Ember Moon",
+          active: true,
+          overall: 83,
+          character: "face",
+          gender: "female",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Eric Young",
+          active: true,
+          overall: 76,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Erik",
+          active: true,
+          overall: 81,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Fandango",
+          active: true,
+          overall: 75,
+          character: "face",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Finn Bálor",
+          active: true,
+          overall: 87,
+          character: "face",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Gentleman Jack Gallagher",
+          active: true,
+          overall: 71,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Goldberg",
+          active: true,
+          overall: 90,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Gran Metalik",
+          active: true,
+          overall: 72,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Harper",
+          active: true,
+          overall: 78,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Heath Slater",
+          active: true,
+          overall: 71,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Hulk Hogan",
+          active: true,
+          overall: 92,
+          character: "face",
+          gender: "male",
+          brand: "Federation",
+          type: "legend",
+        },
+        {
+          name: "Humberto Carrillo",
+          active: true,
+          overall: 76,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Io Shirai",
+          active: true,
+          overall: 78,
+          character: "face",
+          gender: "female",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Ivar",
+          active: true,
+          overall: 81,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Jake Roberts",
+          active: true,
+          overall: 85,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Jaxson Ryker",
+          active: true,
+          overall: 79,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Jeff Hardy",
+          active: true,
+          overall: 82,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Jerry 'The King' Lawler",
+          active: true,
+          overall: 86,
+          character: "face",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Jey Uso",
+          active: true,
+          overall: 84,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Jim Neidhart",
+          active: true,
+          overall: 79,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Jimmy Uso",
+          active: true,
+          overall: 84,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Jinder Mahal",
+          active: true,
+          overall: 76,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "John Cena",
+          active: true,
+          overall: 89,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Johnny Gargano",
+          active: true,
+          overall: 84,
+          character: "heel",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Kairi Sane",
+          active: true,
+          overall: 78,
+          character: "face",
+          gender: "female",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Kalisto",
+          active: true,
+          overall: 75,
+          character: "face",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Kane",
+          active: true,
+          overall: 80,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Karl Anderson",
+          active: true,
+          overall: 81,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Kassius Ohno",
+          active: true,
+          overall: 73,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Keith Lee",
+          active: true,
+          overall: 77,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Kevin Nash",
+          active: true,
+          overall: 88,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Kevin Owens",
+          active: true,
+          overall: 87,
+          character: "face",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "King Corbin",
+          active: true,
+          overall: 87,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Kofi Kingston",
+          active: true,
+          overall: 90,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Kurt Angle",
+          active: true,
+          overall: 89,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Kyle O'Reilly",
+          active: true,
+          overall: 78,
+          character: "face",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Lacey Evans",
+          active: true,
+          overall: 82,
+          character: "heel",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Lana",
+          active: true,
+          overall: 69,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Lars Sullivan",
+          active: true,
+          overall: 80,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Lince Dorado",
+          active: true,
+          overall: 72,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Lita",
+          active: true,
+          overall: 86,
+          character: "face",
+          gender: "female",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Liv Morgan",
+          active: true,
+          overall: 70,
+          character: "face",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Luke Gallows",
+          active: true,
+          overall: 81,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Mandy Rose",
+          active: true,
+          overall: 77,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Mankind",
+          active: true,
+          overall: 84,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Maria Kanellis",
+          active: true,
+          overall: 66,
+          character: "heel",
+          gender: "female",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Mark Andrews",
+          active: true,
+          overall: 72,
+          character: "face",
+          gender: "male",
+          brand: "NXT UK",
+          type: "superstar",
+        },
+        {
+          name: "Mark Henry",
+          active: true,
+          overall: 82,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Maryse",
+          active: true,
+          overall: 71,
+          character: "heel",
+          gender: "female",
+          brand: "Alumni",
+          type: "manager",
+        },
+        {
+          name: "Matt Hardy",
+          active: true,
+          overall: 81,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Riddle",
+          active: true,
+          overall: 80,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Mia Yim",
+          active: true,
+          overall: 76,
+          character: "face",
+          gender: "female",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Mickie James",
+          active: true,
+          overall: 75,
+          character: "face",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Mike Kanellis",
+          active: true,
+          overall: 68,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Mojo Rawley",
+          active: true,
+          overall: 75,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Molly Holly",
+          active: true,
+          overall: 80,
+          character: "face",
+          gender: "female",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Montez Ford",
+          active: true,
+          overall: 79,
+          character: "face",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Mr. McMahon",
+          active: true,
+          overall: 73,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "authority",
+        },
+        {
+          name: "Mustafa Ali",
+          active: true,
+          overall: 81,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Naomi",
+          active: true,
+          overall: 77,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Natalya",
+          active: true,
+          overall: 76,
+          character: "heel",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Nia Jax",
+          active: true,
+          overall: 79,
+          character: "heel",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Nikki Bella",
+          active: true,
+          overall: 81,
+          character: "face",
+          gender: "female",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Nikki Cross",
+          active: true,
+          overall: 80,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "No Way Jose",
+          active: true,
+          overall: 67,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Noam Dar",
+          active: true,
+          overall: 68,
+          character: "face",
+          gender: "male",
+          brand: "NXT UK",
+          type: "superstar",
+        },
+        {
+          name: "Oney Lorcan",
+          active: true,
+          overall: 76,
+          character: "face",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Otis",
+          active: true,
+          overall: 74,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Paige",
+          active: true,
+          overall: 84,
+          character: "face",
+          gender: "female",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Papa Shango",
+          active: true,
+          overall: 77,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Paul Heyman",
+          active: true,
+          overall: 84,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "manager",
+        },
+        {
+          name: "Pete Dunne",
+          active: true,
+          overall: 80,
+          character: "heel",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Peyton Royce",
+          active: true,
+          overall: 78,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Randy Orton",
+          active: true,
+          overall: 88,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Randy Savage",
+          active: true,
+          overall: 89,
+          character: "face",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Razor Ramon",
+          active: true,
+          overall: 85,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Rey Mysterio",
+          active: true,
+          overall: 86,
+          character: "face",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Rezar",
+          active: true,
+          overall: 76,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Rhea Ripley",
+          active: true,
+          overall: 78,
+          character: "face",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Ric Flair",
+          active: true,
+          overall: 90,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Ricky Steamboat",
+          active: true,
+          overall: 87,
+          character: "face",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Ricochet",
+          active: true,
+          overall: 85,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Robert Roode",
+          active: true,
+          overall: 80,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Roderick Strong",
+          active: true,
+          overall: 79,
+          character: "heel",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Roman Reigns",
+          active: true,
+          overall: 92,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Ronda Rousey",
+          active: true,
+          overall: 90,
+          character: "heel",
+          gender: "female",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Rowan",
+          active: true,
+          overall: 81,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Rowdy Roddy Piper",
+          active: true,
+          overall: 86,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "R-Truth",
+          active: true,
+          overall: 79,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Ruby Riott",
+          active: true,
+          overall: 77,
+          character: "face",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Rusev",
+          active: true,
+          overall: 79,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Sami Zayn",
+          active: true,
+          overall: 80,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Samir Singh",
+          active: true,
+          overall: 60,
+          character: "heel",
+          gender: "male",
+          brand: "205 Live",
+          type: "superstar",
+        },
+        {
+          name: "Samoa Joe",
+          active: true,
+          overall: 88,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Sarah Logan",
+          active: true,
+          overall: 70,
+          character: "face",
+          gender: "female",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Sasha Banks",
+          active: true,
+          overall: 80,
+          character: "heel",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Scott Dawson",
+          active: true,
+          overall: 83,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Scott Hall",
+          active: true,
+          overall: 86,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Seth Rollins",
+          active: true,
+          overall: 92,
+          character: "heel",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Shane McMahon",
+          active: true,
+          overall: 81,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "legend",
+        },
+        {
+          name: "Shane Thorne",
+          active: true,
+          overall: 69,
+          character: "heel",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Shawn Michaels",
+          active: true,
+          overall: 88,
+          character: "face",
+          gender: "male",
+          brand: "Federation",
+          type: "legend",
+        },
+        {
+          name: "Shayna Baszler",
+          active: true,
+          overall: 83,
+          character: "heel",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Sheamus",
+          active: true,
+          overall: 82,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Shelton Benjamin",
+          active: true,
+          overall: 77,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Shinsuke Nakamura",
+          active: true,
+          overall: 88,
+          character: "face",
+          gender: "male",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Sin Cara",
+          active: true,
+          overall: 71,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Sonya Deville",
+          active: true,
+          overall: 78,
+          character: "face",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Stephanie McMahon",
+          active: true,
+          overall: 75,
+          character: "heel",
+          gender: "female",
+          brand: "Raw",
+          type: "authority",
+        },
+        {
+          name: "Steve Austin",
+          active: true,
+          overall: 92,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Sting",
+          active: true,
+          overall: 87,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Sunil Singh",
+          active: true,
+          overall: 60,
+          character: "heel",
+          gender: "male",
+          brand: "205 Live",
+          type: "superstar",
+        },
+        {
+          name: "Tamina",
+          active: true,
+          overall: 73,
+          character: "heel",
+          gender: "female",
+          brand: "Smackdown",
+          type: "superstar",
+        },
+        {
+          name: "Ted DiBiase",
+          active: true,
+          overall: 85,
+          character: "heel",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "The Brian Kendrick",
+          active: true,
+          overall: 73,
+          character: "heel",
+          gender: "male",
+          brand: "205 Live",
+          type: "superstar",
+        },
+        {
+          name: "The Fiend Bray Wyatt",
+          active: true,
+          overall: 86,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "The Miz",
+          active: true,
+          overall: 86,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "The Rock",
+          active: true,
+          overall: 93,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Titus O'Neil",
+          active: true,
+          overall: 75,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Tommaso Ciampa",
+          active: true,
+          overall: 82,
+          character: "face",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Toni Storm",
+          active: true,
+          overall: 79,
+          character: "face",
+          gender: "female",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Tony Nese",
+          active: true,
+          overall: 77,
+          character: "heel",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Trent Seven",
+          active: true,
+          overall: 77,
+          character: "face",
+          gender: "male",
+          brand: "NXT UK",
+          type: "superstar",
+        },
+        {
+          name: "Triple H",
+          active: true,
+          overall: 89,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "legend",
+        },
+        {
+          name: "Trish Stratus",
+          active: true,
+          overall: 87,
+          character: "face",
+          gender: "female",
+          brand: "Alumni",
+          type: "legend",
+        },
+        {
+          name: "Tucker",
+          active: true,
+          overall: 75,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Tyler Bate",
+          active: true,
+          overall: 77,
+          character: "face",
+          gender: "male",
+          brand: "NXT UK",
+          type: "superstar",
+        },
+        {
+          name: "Tyler Breeze",
+          active: true,
+          overall: 77,
+          character: "face",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Ultimate Warrior",
+          active: true,
+          overall: 90,
+          character: "face",
+          gender: "male",
+          brand: "Federation",
+          type: "superstar",
+        },
+        {
+          name: "Undertaker",
+          active: true,
+          overall: 87,
+          character: "face",
+          gender: "male",
+          brand: "Federation",
+          type: "legend",
+        },
+        {
+          name: "Velveteen Dream",
+          active: true,
+          overall: 81,
+          character: "face",
+          gender: "male",
+          brand: "NXT",
+          type: "superstar",
+        },
+        {
+          name: "Xavier Woods",
+          active: true,
+          overall: 85,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "X-Pac",
+          active: true,
+          overall: 85,
+          character: "heel",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Zack Ryder",
+          active: true,
+          overall: 76,
+          character: "face",
+          gender: "male",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Zelina Vega",
+          active: true,
+          overall: 83,
+          character: "heel",
+          gender: "female",
+          brand: "Alumni",
+          type: "superstar",
+        },
+        {
+          name: "Angel Garza",
+          active: true,
+          overall: 77,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Damien Priest",
+          active: true,
+          overall: 82,
+          character: "face",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "John Morrison",
+          active: true,
+          overall: 86,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "MACE",
+          active: true,
+          overall: 83,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "MVP",
+          active: true,
+          overall: 84,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Omos",
+          active: true,
+          overall: 81,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "RECKONING",
+          active: true,
+          overall: 76,
+          character: "heel",
+          gender: "female",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "Riddick Moss",
+          active: true,
+          overall: 80,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "SLAPJACK",
+          active: true,
+          overall: 74,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+        {
+          name: "T-BAR",
+          active: true,
+          overall: 82,
+          character: "heel",
+          gender: "male",
+          brand: "Raw",
+          type: "superstar",
+        },
+      ];
+
+      // pick random matches based on chance value
+      // here I'm assuming chance is the % chance that it has of being picked.  (source: https://stackoverflow.com/a/55671924/5648954)
+      const pickMatches = (data) => {
+        const weights = [];
+        let i;
+        for (i = 0; i < data.length; i++) {
+          const [, weight] = data[i];
+          weights.push(weight + (weights[i - 1] || 0));
+        }
+
+        const random = Math.random() * weights[weights.length - 1];
+        for (i = 0; i < weights.length; i++) if (weights[i] > random) break;
+
+        return data[i][0];
+      };
+
+      // get matches data
+      const getShowMatches = (foundMatches) =>
+        foundMatches
+          .filter(({ active }) => active)
+          .map((matchObj) => [matchObj, matchObj.chance]);
+
+      // Get an active show object by its name
+      const getShowObj = (showName, shows) =>
+        shows.find(({ name, active }) => showName === name && active);
+
+      // Zip the arrays: A = [a, b], B = [x, y] --- zip(A, B) ---> [[a, x], [b, y]] OR [[x, a], [y, b]]
+      // Eg2: A = [a, b], B = [x, y, z] ---- zip(A, B) ----> [[a, x], [b, y], z] (a,x & b,y pairs can be switched also)
+      // precondition: A.length <= B.length (makeValid ensures this)
+      const zip = (arrA, arrB) => {
+        // arr
+        const result = [];
+        const aFirst = Math.random() < 0.5; // false 1/2 the time, true the other 1/2 of the time
+        for (let i = 0; i < arrA.length; i++) {
+          const pair = [arrA[i], arrB[i]];
+          result.push(aFirst ? pair : pair.reverse());
+        }
+        return result.concat(arrB.slice(arrA.length)); // add left over values (if any) from B onto the result
+      };
+
+      // Fisher-Yates shuffle algorithm, takes an array, and shuffles its values (only top level arrays are shuffles, nested arrays keep the same ordering of their elements, however, they can be shuffled within the parent array)
+      const shuffle = (arr) => {
+        for (let i = arr.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1)); // pick random index
+          // Swap current items at index (i) with item at random index (j)
+          let temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+        return arr;
+      };
+
+      // Split array into two, one with "Two on Two Tag Team" (ie: consecutiveItem), the other with the other elements
+      const splitArray = (matches, consecutiveItem) => {
+        const consecs = [];
+        const nonConsecs = [];
+        for (const match of matches) {
+          if (match.type === consecutiveItem.type) {
+            consecs.push(match);
+          } else {
+            nonConsecs.push(match);
+          }
+        }
+        return [consecs, nonConsecs];
+      };
+
+      const makeValid = (
+        consecs,
+        nonConsecs,
+        consecutiveItem,
+        deactivatedMatches
+      ) => {
+        // Case 1: We don't have enough consecs
+        while (consecs.length < 2) {
+          // must be at least 2 consecutiveItems in the result
+          consecs.push(consecutiveItem);
+          nonConsecs.pop(); // keep the balance (no_of_matches)
+        }
+        // Case 2: We have too many consecs
+        while (consecs.length > nonConsecs.length) {
+          consecs.pop();
+          nonConsecs.push(pickMatches(deactivatedMatches));
+        }
+
+        return [consecs, nonConsecs];
+      };
+
+      const removeConsecutives = (
+        matches,
+        consecutiveItem,
+        deactivatedMatches
+      ) => {
+        const [consecs, nonConsecs] = splitArray(matches, consecutiveItem);
+        // If number of consecutives/nonCensecutives cannot be used to make a valid matches array
+        // we need to remove some items from consecs and add some items to nonConecs or vice versa
+        makeValid(consecs, nonConsecs, consecutiveItem, deactivatedMatches); // this changes consecs and nonConsecs "in place", so the modifications that occur in the function change the arrays themselves, that's why nothing is returned
+
+        const zipped = zip(consecs, nonConsecs);
+        const shuffled = shuffle(zipped);
+        return shuffled.flat();
+      };
+
+      const assignGender = (matchesObjs) => {
+        return matchesObjs.map(({ type, maleChance, characterSlots }) => ({
+          type,
+          gender: Math.random() < maleChance / 100 ? "Male" : "Female",
+          characterSlots,
+        }));
+        // ^-- Math.random generates a random decimal between 0 and 1 (not inclusive of 1). If the number it generates is less than maleChance/100 then we can pick "Male", otherwise Female. Eg: statistically speaking, 75% of the time, the number generated by Math.random() will be between 0 and 0.75, so if maleChance is 75, then we will get "Male" 75% of the time, and "Female" 25% of the time.
+      };
+
+      const assignCharacters = (matchesObjs) => {
+        const characterTypes = [
+          "Face",
+          "Heel",
+          "Face",
+          "Heel",
+          "Face",
+          "Heel",
+          "Face",
+          "Heel",
+        ];
+
+        const doubleEntries = (arr) => {
+          return arr.reduce((acc, curr) => {
+            acc.push(curr, curr);
+            return acc;
+          }, []);
+        };
+
+        return matchesObjs.map(({ type, gender, characterSlots }) => ({
+          type,
+          gender,
+          characters:
+            type === "Two on Two Tag Team"
+              ? doubleEntries(shuffle(characterTypes).slice(0, characterSlots))
+              : shuffle(characterTypes) // .sort(() => 0.5-Math.random()) actually isn't _random_. There is a shuffle function above you can use for an unbias shuffle.
+                  .slice(0, 2),
+        }));
+      };
+
+      // const assignCriteria = (matchesObjs) => {
+      //   // \/ -- return the array generated by `.map()`.
+      //   return matchesObjs.map((obj) => {
+      //     var min = Math.floor(Math.random() * (82 - 69) + 69);
+      //     return {
+      //       ...obj,
+      //       criteria: [min, min + 4],
+      //     };
+      //   });
+      // };
+      const assignCriteria = (matchesObjs) => {
+        return matchesObjs.map((obj, i) => {
+          var min = Math.floor(Math.random() * (80 - 69) + 69);
+          var max = Math.floor(Math.random() * (94 - 86) + 86);
+          return {
+            ...obj,
+            criteria:
+              i === 0 || i === matchesObjs.length - 1
+                ? [max, max + 9]
+                : [min, min + 5],
+          }; // criteria for first and last^
+        });
+      };
+
+      let already_used = [];
+      const assignRosterMatches = (matches, roster) => {
+        return matches.map((obj) => ({
+          ...obj,
+          rosterCharacter: obj.characters.map((currCharacter) => {
+            const [min, max] = obj.criteria;
+            let attempts = 3;
+
+            while (attempts > 0) {
+              const filteredRoster = roster.filter(
+                ({ name, gender, character, overall, active, brand, type }) =>
+                  active &&
+                  brand === chosenShow &&
+                  character === currCharacter.toLowerCase() &&
+                  !already_used.find((o) => o.name == name) &&
+                  gender === obj.gender.toLowerCase() &&
+                  type === "superstar" &&
+                  (attempts < 2 || min <= overall) &&
+                  (attempts < 2 || overall <= max)
+              );
+
+              // console.log("Filtered Roster Length: ", filteredRoster.length, {
+              //     currCharacter, chosenShow, wanted_gender: obj.gender
+              // })
+              // console.log("Already used: ", already_used.length)
+
+              if (filteredRoster.length > 0) {
+                const randIdx = Math.floor(
+                  Math.random() * filteredRoster.length
+                );
+
+                const found = filteredRoster[randIdx];
+                already_used = [...already_used, found];
+                return { ...found, attempts };
+              }
+              attempts--;
+            }
+            return null;
+          }),
+        }));
+
+        return result;
+      };
+
+      const generateMatchList = (showName, shows) => {
+        // Match list, quantity based on no_of_matches
+        const consecutiveItemType = "Two on Two Tag Team";
+
+        const showObj = getShowObj(showName, shows) ?? {}; // if this returns undefined, use an empty object
+        const consecutiveItem = showObj.matches.find(
+          ({ type }) => type === consecutiveItemType
+        );
+        // Deactive the consecutiveItem so that it doesn't get picked
+        const deactivatedMatches = getShowMatches(
+          showObj.matches.map((o) => ({
+            ...o,
+            active: o.active && o.type !== consecutiveItemType,
+          }))
+        );
+
+        // Only valid formation is ["Two on Two Tag Team", "<none two tag team item>", "Two on Two Tag Team"] when no_of_matches is 3
+        if (showObj.no_of_matches === 3) {
+          return [
+            consecutiveItem,
+            pickMatches(deactivatedMatches),
+            consecutiveItem,
+          ];
+        }
+
+        const foundMatches = showObj?.matches ?? []; // Check that we can access `.matches` on the show object, if not, use an empty array
+        const showMatches = getShowMatches(foundMatches);
+        const matches = [];
+        for (let i = 0; i < showObj.no_of_matches; i++) {
+          matches.push(pickMatches(showMatches));
+        }
+
+        const cleanedMatches = removeConsecutives(
+          matches,
+          consecutiveItem,
+          deactivatedMatches
+        );
+        const genderedMatches = assignGender(cleanedMatches);
+        const structuredMatches = assignCharacters(genderedMatches);
+        const criteriaMatches = assignCriteria(structuredMatches);
+        const assignedRosterMatches = assignRosterMatches(
+          criteriaMatches,
+          roster
+        );
+        return assignedRosterMatches;
+      };
+
+      //console.log(groupRoster(roster))
+
+      // const getKey = (o) => `${o.brand}`
+      // const getKey = (o) => `${o.brand}_${o.gender}`
+      // const getKey = (o) => `${o.brand}_${o.gender}_${o.character}`
+
+      // console.log(roster.reduce(
+      //     (prev, o) =>
+      //     ({...prev, [getKey(o)]: prev[getKey(o)] ? prev[getKey(o)] + 1 : 1}), {}) )
+
+      // // // print out
+      const result = generateMatchList(chosenShow, shows);
+      const text =
+        "<ul>" +
+        result.reduce((txt, value) => {
+          return `${txt}<li>${value.type} - ${value.gender} - ${
+            value.characters
+          } - ${value.rosterCharacter.map((o) =>
+            o == null ? "Not found" : `${o.name} (Attempts: ${o.attempts})`
+          )}</li>`;
+        }, "") +
+        "</ul>";
+      document.getElementById("demo").innerHTML = text;
+
+      console.log(
+        result.map((data) => ({
+          ...data,
+          names: data.rosterCharacter.map((o) =>
+            o == null ? "Not found" : o.attempts + "!" + o.name
+          ),
+        }))
+      );
+    </script>
+  </body>
+</html>
